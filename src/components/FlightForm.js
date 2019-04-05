@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { formatedDate } from '../utils/reformat';
+import uuid from 'uuid/v4';
 
 const styles = theme => ({
   textField: {
@@ -25,15 +27,78 @@ const styles = theme => ({
   }
 });
 
+const initData = {
+  tag: 'cheap',
+  departure: '',
+  arrival: '',
+  departureTime: '',
+  arrivalTime: ''
+};
+
 const FlightForm = props => {
+  const [data, setData] = useState(initData);
+
+  const clear = () => {
+    setData(initData);
+  };
+
+  const handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.target;
+
+    setData({
+      ...data,
+      [name]: value
+    });
+  };
+
+  const notFillAll = () => {
+    const { departure, arrival, departureTime, arrivalTime } = data;
+    if (departure === '') return true;
+    if (arrival === '') return true;
+    if (departureTime === '') return true;
+    if (arrivalTime === '') return true;
+    return false;
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    //TODO: check if data valid
+
+    const { tag, departure, arrival, departureTime, arrivalTime } = data;
+    // console.log(data);
+
+    const newData = {
+      id: uuid(),
+      tag,
+      departure,
+      arrival,
+      departureTime: formatedDate(departureTime),
+      arrivalTime: formatedDate(arrivalTime)
+    };
+
+    tag === 'cheap'
+      ? props.handleAddCheapFlight(newData)
+      : props.handleAddBusinessFlight(newData);
+
+    clear();
+  };
+
+  // console.log(data);
   const { classes } = props;
   return (
     <>
       <h1>Add One</h1>
-      <form noValidate autoComplete="off">
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={event => handleSubmit(event)}
+      >
         <div>
           <TextField
-            id="standard-select-currency-native"
+            id="tag"
+            name="tag"
+            onChange={event => handleChange(event)}
             select
             className={classes.textField}
             label="Flight Class"
@@ -45,7 +110,7 @@ const FlightForm = props => {
               }
             }}
           >
-            <option key="cheap" value="cheap">
+            <option key="cheap" value="cheap" defaultValue>
               Cheap
             </option>
             <option key="business" value="business">
@@ -57,15 +122,21 @@ const FlightForm = props => {
         <div>
           <TextField
             id="departure"
+            name="departure"
             label="Departure"
             margin="normal"
+            value={data.departure}
+            onChange={event => handleChange(event)}
             className={classes.textField}
           />
           <TextField
             id="departureTime"
+            name="departureTime"
             label="Departure Time"
             type="datetime-local"
-            defaultValue="2017-05-24T10:30"
+            // defaultValue="2017-05-24T10:30"
+            value={data.departureTime}
+            onChange={event => handleChange(event)}
             className={classes.dateTimeField}
             InputLabelProps={{
               shrink: true
@@ -76,16 +147,22 @@ const FlightForm = props => {
         <div>
           <TextField
             id="arrival"
+            name="arrival"
             label="Arrival"
             margin="normal"
+            value={data.arrival}
+            onChange={event => handleChange(event)}
             className={classes.textField}
           />
 
           <TextField
             id="arrivalTime"
+            name="arrivalTime"
             label="arrival Time"
             type="datetime-local"
-            defaultValue="2017-05-24T10:30"
+            // defaultValue="2017-05-24T10:30"
+            value={data.arrivalTime}
+            onChange={event => handleChange(event)}
             className={classes.dateTimeField}
             InputLabelProps={{
               shrink: true
@@ -94,14 +171,19 @@ const FlightForm = props => {
         </div>
 
         <div className={classes.buttonGroup}>
-          <Button type="button" variant="outlined" className={classes.button}>
+          <Button
+            type="button"
+            variant="outlined"
+            className={classes.button}
+            onClick={() => clear()}
+          >
             Clear
           </Button>
           <Button
             type="submit"
             variant="outlined"
             className={classes.button}
-            disabled
+            disabled={notFillAll()}
           >
             Submit
           </Button>

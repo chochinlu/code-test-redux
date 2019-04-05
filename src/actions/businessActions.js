@@ -18,3 +18,8 @@ export const getBusinessErrorAction = error => ({
   type: types.GET_BUSINESS_ERROR,
   error
 });
+
+export const addBusinessFlightAction = flight => ({
+  type: types.ADD_BUSINESS_FLIGHT,
+  flight
+});

@@ -31,15 +31,18 @@ import { format } from 'date-fns';
 }
 */
 
+export const formatedDate = dateTime =>
+  format(new Date(dateTime), 'YYYY-MM-DD HH:mm:SS');
+
 export const reformatCheap = cheap => {
   const { departureTime, arrivalTime } = cheap;
 
   return {
     ...cheap,
     // departureTime: new Date(departureTime).toJSON(),
-    departureTime: format(new Date(departureTime), 'YYYY-MM-DD HH:mm:SS'),
+    departureTime: formatedDate(departureTime),
     // arrivalTime: new Date(arrivalTime).toJSON(),
-    arrivalTime: format(new Date(arrivalTime), 'YYYY-MM-DD HH:mm:SS'),
+    arrivalTime: formatedDate(arrivalTime),
     tag: 'cheap'
   };
 };
@@ -56,8 +59,8 @@ export const reformatBusiness = ({
     id: uuid,
     departure,
     arrival,
-    departureTime: format(new Date(departureTime), 'YYYY-MM-DD HH:mm:SS'),
-    arrivalTime: format(new Date(arrivalTime), 'YYYY-MM-DD HH:mm:SS'),
+    departureTime: formatedDate(departureTime),
+    arrivalTime: formatedDate(arrivalTime),
     tag: 'business'
   };
 };

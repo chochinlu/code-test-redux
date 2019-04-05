@@ -26,8 +26,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // this.props.handleGetCheap();
-    // this.props.handleGetBusiness();
+    this.props.handleGetCheap();
+    this.props.handleGetBusiness();
   }
 
   handleChange = (event, value) => {
@@ -37,8 +37,15 @@ class App extends Component {
   render() {
     // console.log(this.props.cheap);
     const { classes, cheap, business } = this.props;
+    const { handleAddCheapFlight, handleAddBusinessFlight } = this.props;
 
     const flightComponent = <Flight cheap={cheap} business={business} />;
+    const formComponent = (
+      <FlightForm
+        handleAddCheapFlight={handleAddCheapFlight}
+        handleAddBusinessFlight={handleAddBusinessFlight}
+      />
+    );
 
     return (
       <Grid container>
@@ -54,7 +61,7 @@ class App extends Component {
             <Switch>
               <Route path="/" exact component={() => flightComponent} />
               <Route path="/flight" exact component={() => flightComponent} />
-              <Route path="/flight_form" component={() => <FlightForm />} />
+              <Route path="/flight_form" component={() => formComponent} />
               <Route component={NotMatch} />
             </Switch>
           </Paper>

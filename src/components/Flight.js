@@ -6,8 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import { mockCheap, mockBussiness } from '../utils/mockData';
-
 const styles = theme => ({
   table: {
     minWidth: 700
@@ -20,8 +18,6 @@ const styles = theme => ({
 });
 
 const Flight = ({ classes, cheap, business }) => {
-  // console.log(JSON.stringify(cheap.flight));
-
   return (
     <>
       <h1>Flight</h1>
@@ -30,30 +26,7 @@ const Flight = ({ classes, cheap, business }) => {
       {business.loading && <div>Loading Business flight...</div>}
       {business.error && <div>{business.error}</div>}
 
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Class</TableCell>
-            <TableCell>Departure</TableCell>
-            <TableCell>Arrival</TableCell>
-            <TableCell>Departure Time</TableCell>
-            <TableCell>A rrival Time</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {[...mockCheap, ...mockBussiness].map(f => (
-            <TableRow key={f.id} className={classes.row} hover>
-              <TableCell>{f.tag}</TableCell>
-              <TableCell>{f.departure}</TableCell>
-              <TableCell> {f.arrival}</TableCell>
-              <TableCell>{f.departureTime}</TableCell>
-              <TableCell>{f.arrivalTime}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-
-      {/* {(cheap.flight.length > 0 || business.flight.length > 0) && (
+      {(cheap.flight.length > 0 || business.flight.length > 0) && (
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -76,7 +49,7 @@ const Flight = ({ classes, cheap, business }) => {
             ))}
           </TableBody>
         </Table>
-      )} */}
+      )}
     </>
   );
 };

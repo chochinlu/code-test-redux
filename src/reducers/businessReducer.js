@@ -13,6 +13,8 @@ export default function(business = initialState.business, action) {
       };
     case types.GET_BUSINESS_ERROR:
       return { ...business, error: action.error };
+    case types.ADD_BUSINESS_FLIGHT:
+      return { ...business, flight: [action.flight, ...business.flight] };
     default:
       return business;
   }

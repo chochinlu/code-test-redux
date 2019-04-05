@@ -18,3 +18,8 @@ export const getCheapErrorAction = error => ({
   type: types.GET_CHEAP_ERROR,
   error
 });
+
+export const addCheapFlightAction = flight => ({
+  type: types.ADD_CHEAP_FLIGHT,
+  flight
+});

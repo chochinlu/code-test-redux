@@ -1,3 +1,5 @@
+import { mockCheap, mockBussiness } from '../utils/mockData';
+
 export default {
   cheap: {
     flight: [],
@@ -10,3 +12,16 @@ export default {
     loading: false
   }
 };
+
+// export default {
+//   cheap: {
+//     flight: mockCheap,
+//     error: null,
+//     loading: false
+//   },
+//   business: {
+//     flight: mockBussiness,
+//     error: null,
+//     loading: false
+//   }
+// };

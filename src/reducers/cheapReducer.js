@@ -10,6 +10,8 @@ export default function(cheap = initialState.cheap, action) {
       return { ...cheap, flight: action.payload.map(p => reformatCheap(p)) };
     case types.GET_CHEAP_ERROR:
       return { ...cheap, error: action.error };
+    case types.ADD_CHEAP_FLIGHT:
+      return { ...cheap, flight: [action.flight, ...cheap.flight] };
     default:
       return cheap;
   }

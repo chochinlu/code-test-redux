@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import App from './components/App';
-import { getCheapAction } from './actions/cheapActions';
-import { getBusinessAction } from './actions/businessActions';
+import { getCheapAction, addCheapFlightAction } from './actions/cheapActions';
+import {
+  getBusinessAction,
+  addBusinessFlightAction
+} from './actions/businessActions';
 
 const mapStateToProps = state => ({
   cheap: state.cheap,
@@ -15,6 +18,12 @@ const mapDispatchToProps = dispatch => {
     },
     handleGetBusiness: () => {
       dispatch(getBusinessAction());
+    },
+    handleAddCheapFlight: payload => {
+      dispatch(addCheapFlightAction(payload));
+    },
+    handleAddBusinessFlight: payload => {
+      dispatch(addBusinessFlightAction(payload));
     }
   };
 };
