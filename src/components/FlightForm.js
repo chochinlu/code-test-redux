@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { formatedDate } from '../utils/reformat';
 import uuid from 'uuid/v4';
 
 const styles = theme => ({
+  heading: {
+    paddingTop: theme.spacing.unit
+  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -88,7 +92,10 @@ const FlightForm = props => {
   const { classes } = props;
   return (
     <>
-      <h1>Add One</h1>
+      <Typography variant="h4" gutterBottom className={classes.heading}>
+        Add One
+      </Typography>
+
       <form
         noValidate
         autoComplete="off"

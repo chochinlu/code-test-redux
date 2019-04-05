@@ -9,8 +9,13 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
+  heading: {
+    paddingTop: theme.spacing.unit
+  },
   button: {
     margin: theme.spacing.unit / 2
   },
@@ -163,7 +168,9 @@ const Flight = ({ classes, cheap, business }) => {
 
   return (
     <>
-      <h1>Flight</h1>
+      <Typography variant="h4" gutterBottom className={classes.heading}>
+        Flight
+      </Typography>
       {cheap.loading && <div>Loading Cheap flight...</div>}
       {cheap.error && <div>{cheap.error}</div>}
       {business.loading && <div>Loading Business flight...</div>}
