@@ -44,7 +44,7 @@ class App extends Component {
       <Grid container>
         <AppBar position="sticky" color="default">
           <Tabs value={this.state.value} onChange={this.handleChange}>
-            <Tab label="Flight List" component={Link} to="/flight" />
+            <Tab label="Flight List" component={Link} to="/" />
             <Tab label="Add Flight" component={Link} to="/flight_form" />
           </Tabs>
         </AppBar>
