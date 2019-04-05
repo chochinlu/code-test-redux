@@ -8,6 +8,17 @@ import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Paper from '@material-ui/core/Paper';
+
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    marginTop: theme.spacing.unit * 2,
+    minHeight: '80vh'
+  }
+});
 
 class App extends Component {
   state = {
@@ -24,6 +35,7 @@ class App extends Component {
 
   render() {
     // console.log(this.props.cheap);
+    const { classes } = this.props;
 
     const flightComponent = <Flight cheap={this.props.cheap} />;
 
@@ -36,15 +48,19 @@ class App extends Component {
           </Tabs>
         </AppBar>
 
-        <Switch>
-          <Route path="/" exact component={() => flightComponent} />
-          <Route path="/flight" exact component={() => flightComponent} />
-          <Route path="/flight_form" component={() => <FlightForm />} />
-          <Route component={NotMatch} />
-        </Switch>
+        <Grid item xs={12}>
+          <Paper className={classes.root}>
+            <Switch>
+              <Route path="/" exact component={() => flightComponent} />
+              <Route path="/flight" exact component={() => flightComponent} />
+              <Route path="/flight_form" component={() => <FlightForm />} />
+              <Route component={NotMatch} />
+            </Switch>
+          </Paper>
+        </Grid>
       </Grid>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);

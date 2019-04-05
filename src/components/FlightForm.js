@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default function FlightForm() {
+const FlightForm = props => {
   return (
-    <div>
+    <>
       <h1>Flight Form</h1>
-    </div>
+    </>
   );
-}
+};
+
+export default FlightForm;
