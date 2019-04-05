@@ -7,6 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const styles = theme => ({
   button: {
@@ -20,6 +22,9 @@ const styles = theme => ({
   },
   sortHeader: {
     cursor: 'pointer'
+  },
+  icon: {
+    fontSize: 12
   },
   row: {
     '&:nth-of-type(odd)': {
@@ -35,6 +40,11 @@ const Flight = ({ classes, cheap, business }) => {
   const [departureFilter, setDepartureFilter] = useState('');
   const [arrivalFilter, setArrivalFilter] = useState('');
   const [filterdSource, setFilterdSource] = useState(initSource);
+
+  const [departureDesc, setDepartureDesc] = useState(false);
+  const [arrivalDesc, setArrivalDesc] = useState(false);
+  const [departureTimeDesc, setDepartureTimeDesc] = useState(false);
+  const [arrivalTimeDesc, setArrivalTimeDesc] = useState(false);
 
   const clear = () => {
     setTagFilter('all');
@@ -74,6 +84,7 @@ const Flight = ({ classes, cheap, business }) => {
       : source;
 
   const filterAll = (name, value) => {
+    value = value.toLowerCase();
     let source;
     source = name === 'tag' ? tagFiltedSource(value) : tagFiltedSource();
     source =
@@ -105,9 +116,50 @@ const Flight = ({ classes, cheap, business }) => {
     filterAll('arrival', value);
   };
 
-  const sort = value => {
-    console.log(value);
+  const sortDeparture = () => {
+    setDepartureDesc(!departureDesc);
+
+    let source = filterdSource;
+    source = departureDesc
+      ? source.sort((a, b) => a.departure.localeCompare(b.departure))
+      : source.sort((a, b) => b.departure.localeCompare(a.departure));
+
+    setFilterdSource(source);
   };
+
+  const sortArrival = () => {
+    setArrivalDesc(!arrivalDesc);
+    let source = filterdSource;
+    source = arrivalDesc
+      ? source.sort((a, b) => a.arrival.localeCompare(b.arrival))
+      : source.sort((a, b) => b.arrival.localeCompare(a.arrival));
+    setFilterdSource(source);
+  };
+
+  const sortDepartureTime = () => {
+    setDepartureTimeDesc(!departureTimeDesc);
+    let source = filterdSource;
+    source = departureTimeDesc
+      ? source.sort((a, b) => a.departureTime.localeCompare(b.departureTime))
+      : source.sort((a, b) => b.departureTime.localeCompare(a.departureTime));
+    setFilterdSource(source);
+  };
+
+  const sortArrivalTime = () => {
+    setArrivalTimeDesc(!arrivalTimeDesc);
+    let source = filterdSource;
+    source = arrivalTimeDesc
+      ? source.sort((a, b) => a.arrivalTime.localeCompare(b.arrivalTime))
+      : source.sort((a, b) => b.arrivalTime.localeCompare(a.arrivalTime));
+    setFilterdSource(source);
+  };
+
+  const upArrow = up =>
+    up ? (
+      <ArrowUpwardIcon className={classes.icon} />
+    ) : (
+      <ArrowDownwardIcon className={classes.icon} />
+    );
 
   return (
     <>
@@ -183,13 +235,32 @@ const Flight = ({ classes, cheap, business }) => {
               <TableCell>Class</TableCell>
               <TableCell
                 className={classes.sortHeader}
-                onClick={() => sort('departure')}
+                onClick={() => sortDeparture()}
               >
                 Departure
+                {upArrow(departureDesc)}
               </TableCell>
-              <TableCell>Arrival</TableCell>
-              <TableCell>Departure Time</TableCell>
-              <TableCell>A rrival Time</TableCell>
+              <TableCell
+                className={classes.sortHeader}
+                onClick={() => sortArrival()}
+              >
+                Arrival
+                {upArrow(arrivalDesc)}
+              </TableCell>
+              <TableCell
+                className={classes.sortHeader}
+                onClick={() => sortDepartureTime()}
+              >
+                Departure Time
+                {upArrow(departureTimeDesc)}
+              </TableCell>
+              <TableCell
+                className={classes.sortHeader}
+                onClick={() => sortArrivalTime()}
+              >
+                A rrival Time
+                {upArrow(arrivalTimeDesc)}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
