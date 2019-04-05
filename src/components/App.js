@@ -27,6 +27,7 @@ class App extends Component {
 
   componentDidMount() {
     // this.props.handleGetCheap();
+    // this.props.handleGetBusiness();
   }
 
   handleChange = (event, value) => {
@@ -35,13 +36,13 @@ class App extends Component {
 
   render() {
     // console.log(this.props.cheap);
-    const { classes } = this.props;
+    const { classes, cheap, business } = this.props;
 
-    const flightComponent = <Flight cheap={this.props.cheap} />;
+    const flightComponent = <Flight cheap={cheap} business={business} />;
 
     return (
       <Grid container>
-        <AppBar position="static" color="default">
+        <AppBar position="sticky" color="default">
           <Tabs value={this.state.value} onChange={this.handleChange}>
             <Tab label="Flight List" component={Link} to="/flight" />
             <Tab label="Add Flight" component={Link} to="/flight_form" />

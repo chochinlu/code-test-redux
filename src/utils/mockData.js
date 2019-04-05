@@ -1,163 +1,157 @@
 export const mockCheap = [
   {
-    id: 1091626966118016000,
-    departure: 'Santa Rita',
-    arrival: 'Bordj Bou Arreridj',
-    departureTime: 1554432465199,
-    arrivalTime: 1554434880521
+    id: 6497153703013383000,
+    departure: 'Sarandi',
+    arrival: 'Teodelina',
+    departureTime: '2019-04-05 13:06:92',
+    arrivalTime: '2019-04-05 14:46:92',
+    tag: 'cheap'
   },
   {
-    id: 5309020139528644000,
-    departure: 'Formosa',
-    arrival: 'Camilo Aldao',
-    departureTime: 1554438289243,
-    arrivalTime: 1554444894566
+    id: 7184359826846533000,
+    departure: 'San Jose de la Esquina',
+    arrival: 'Mariano Acosta',
+    departureTime: '2019-04-05 14:23:90',
+    arrivalTime: '2019-04-05 15:18:30',
+    tag: 'cheap'
   },
   {
-    id: 9129630231048156000,
-    departure: 'Tamanghasset',
-    arrival: 'El Palomar',
-    departureTime: 1554430093242,
-    arrivalTime: 1554430953835
+    id: 4627692326335313000,
+    departure: 'Santos Lugares',
+    arrival: 'Jose Leon Suarez',
+    departureTime: '2019-04-05 12:46:06',
+    arrivalTime: '2019-04-05 14:50:15',
+    tag: 'cheap'
   },
   {
-    id: 203086656744871940,
-    departure: 'Santa Clara de Saguier',
-    arrival: 'Justiniano Posse',
-    departureTime: 1554434284665,
-    arrivalTime: 1554439610464
+    id: 1721576703161049000,
+    departure: 'Franck',
+    arrival: 'Puerto Rico',
+    departureTime: '2019-04-05 13:41:19',
+    arrivalTime: '2019-04-05 14:43:23',
+    tag: 'cheap'
   },
   {
-    id: 1414685787291085800,
-    departure: 'Freyre',
-    arrival: 'Todd',
-    departureTime: 1554430214787,
-    arrivalTime: 1554433693196
+    id: 3960664499645844500,
+    departure: 'Luis Guillon',
+    arrival: 'Pueyrredon',
+    departureTime: '2019-04-05 13:00:83',
+    arrivalTime: '2019-04-05 14:52:45',
+    tag: 'cheap'
   },
   {
-    id: 6620799239662056000,
-    departure: 'Brinkmann',
-    arrival: 'San Isidro',
-    departureTime: 1554433974141,
-    arrivalTime: 1554437494298
+    id: 3958508718474952700,
+    departure: 'Nunez',
+    arrival: 'Sarmiento',
+    departureTime: '2019-04-05 12:39:31',
+    arrivalTime: '2019-04-05 13:15:13',
+    tag: 'cheap'
+  }
+];
+
+export const mockBussiness = [
+  {
+    id: 'a36b5604-0f1b-4afa-b684-90e48a0950b7',
+    departure: 'Draria ',
+    arrival: ' Perico',
+    departureTime: '2019-04-05 12:56:49',
+    arrivalTime: '2019-04-05 13:36:23',
+    tag: 'business'
   },
   {
-    id: 6214074320450693000,
-    departure: 'General Deheza',
-    arrival: 'Los Molinos',
-    departureTime: 1554429088619,
-    arrivalTime: 1554429672900
+    id: 'a936cf05-eed2-419c-9cdf-a5872b9d3838',
+    departure: 'Miramar ',
+    arrival: ' Perico',
+    departureTime: '2019-04-05 13:27:65',
+    arrivalTime: '2019-04-05 15:51:32',
+    tag: 'business'
   },
   {
-    id: 2063666541112363000,
-    departure: 'Chajari',
-    arrival: 'Bordj',
-    departureTime: 1554431887517,
-    arrivalTime: 1554441140812
+    id: '033d115f-5696-42ac-b6de-db39b972ea1d',
+    departure: 'San Jose ',
+    arrival: ' San Martin de las Escobas',
+    departureTime: '2019-04-05 14:21:40',
+    arrivalTime: '2019-04-05 14:34:15',
+    tag: 'business'
   },
   {
-    id: 2753780068330218500,
-    departure: 'Buenos Aires',
-    arrival: 'Alejandro Korn',
-    departureTime: 1554431043342,
-    arrivalTime: 1554435420595
+    id: '5ae92ce5-face-454d-abd3-e0a722159b99',
+    departure: 'Jeppener ',
+    arrival: ' Santa Lucia',
+    departureTime: '2019-04-05 12:10:48',
+    arrivalTime: '2019-04-05 12:32:77',
+    tag: 'business'
   },
   {
-    id: 5617242032799072000,
-    departure: 'Germania',
-    arrival: 'San Isidro de Lules',
-    departureTime: 1554435324214,
-    arrivalTime: 1554442902469
+    id: 'ed58b99d-d1ca-45cd-9558-91fb6af960b0',
+    departure: 'Realico ',
+    arrival: ' Maipu',
+    departureTime: '2019-04-05 12:44:86',
+    arrivalTime: '2019-04-05 15:00:14',
+    tag: 'business'
   },
   {
-    id: 4063410170496535600,
-    departure: 'Coy Aike',
-    arrival: 'Corrientes',
-    departureTime: 1554430953211,
-    arrivalTime: 1554438216592
+    id: '4d6a872e-5568-45c5-ad36-95236af20342',
+    departure: 'Winifreda ',
+    arrival: ' Djelfa',
+    departureTime: '2019-04-05 14:38:16',
+    arrivalTime: '2019-04-05 14:40:02',
+    tag: 'business'
   },
   {
-    id: 5674339484457158000,
-    departure: 'San Fernando',
-    arrival: 'Henderson',
-    departureTime: 1554430135020,
-    arrivalTime: 1554438860288
+    id: '6d57e016-b8f3-4af0-8fae-d4354eb0cae6',
+    departure: 'Eduardo Castex ',
+    arrival: ' La Madrid',
+    departureTime: '2019-04-05 13:39:17',
+    arrivalTime: '2019-04-05 16:13:11',
+    tag: 'business'
   },
   {
-    id: 723499875387437000,
-    departure: 'Gobernador Galvez',
-    arrival: 'San Cristobal',
-    departureTime: 1554435288779,
-    arrivalTime: 1554437016027
+    id: '8b4a8412-aef1-4258-afa7-daee75f156ee',
+    departure: 'San Gregorio ',
+    arrival: ' Veinticinco de Mayo',
+    departureTime: '2019-04-05 13:58:06',
+    arrivalTime: '2019-04-05 16:14:27',
+    tag: 'business'
   },
   {
-    id: 3518416273453568000,
-    departure: 'Pinamar',
-    arrival: 'Aldo Bonzi',
-    departureTime: 1554429316992,
-    arrivalTime: 1554433105245
+    id: '76da60e1-666b-47bc-a3fa-74557c6d46f9',
+    departure: 'El Hoyo ',
+    arrival: ' Ezeiza',
+    departureTime: '2019-04-05 14:40:88',
+    arrivalTime: '2019-04-05 16:30:89',
+    tag: 'business'
   },
   {
-    id: 8529438383866759000,
-    departure: 'Posadas',
-    arrival: 'Azul',
-    departureTime: 1554430843946,
-    arrivalTime: 1554438585544
+    id: 'd6b565cb-9f30-4b8b-accb-2a3c7fbfebf6',
+    departure: 'Colon ',
+    arrival: ' San Lorenzo',
+    departureTime: '2019-04-05 14:23:94',
+    arrivalTime: '2019-04-05 16:54:12',
+    tag: 'business'
   },
   {
-    id: 1882539510651262000,
-    departure: 'Mariano Acosta',
-    arrival: 'Sampacho',
-    departureTime: 1554434773035,
-    arrivalTime: 1554438534391
+    id: '0cb81c92-5f46-43fe-9e5f-7c16ca7dc26c',
+    departure: 'Henderson ',
+    arrival: ' San Miguel',
+    departureTime: '2019-04-05 12:34:95',
+    arrivalTime: '2019-04-05 14:23:70',
+    tag: 'business'
   },
   {
-    id: 4223492683356337000,
-    departure: 'Alvear',
-    arrival: 'Baradero',
-    departureTime: 1554432740956,
-    arrivalTime: 1554439231115
+    id: 'd71ea5e7-3746-4e92-8ecd-d88809df7d84',
+    departure: 'La Boca ',
+    arrival: ' Llavallol',
+    departureTime: '2019-04-05 12:36:51',
+    arrivalTime: '2019-04-05 13:40:78',
+    tag: 'business'
   },
   {
-    id: 489493658425892860,
-    departure: 'Recoleta',
-    arrival: 'Salguero',
-    departureTime: 1554435087713,
-    arrivalTime: 1554437390801
-  },
-  {
-    id: 6144222687768117000,
-    departure: 'San Antonio Oeste',
-    arrival: 'Monte Hermoso',
-    departureTime: 1554435814915,
-    arrivalTime: 1554445498662
-  },
-  {
-    id: 7544202025386899000,
-    departure: 'Cramer',
-    arrival: 'Castelli',
-    departureTime: 1554434670859,
-    arrivalTime: 1554437961507
-  },
-  {
-    id: 5546103205136160000,
-    departure: 'Realico',
-    arrival: 'Palermo',
-    departureTime: 1554435979384,
-    arrivalTime: 1554445154098
-  },
-  {
-    id: 4668497285360288000,
-    departure: 'Isidro Casanova',
-    arrival: 'Canada de Gomez',
-    departureTime: 1554432120546,
-    arrivalTime: 1554440332570
-  },
-  {
-    id: 826960373341869000,
-    departure: 'Hersilia',
-    arrival: 'Canada Rosquin',
-    departureTime: 1554430674616,
-    arrivalTime: 1554432034443
+    id: '9cc8931e-2eed-4097-889f-037b6eb53cfa',
+    departure: 'Santiago del Estero ',
+    arrival: ' Veronica',
+    departureTime: '2019-04-05 14:36:72',
+    arrivalTime: '2019-04-05 15:43:51',
+    tag: 'business'
   }
 ];
