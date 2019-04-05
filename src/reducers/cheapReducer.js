@@ -6,7 +6,7 @@ export default function(cheap = initialState.cheap, action) {
     case types.GET_CHEAP_SUCCESS:
       return { ...cheap, flight: action.payload };
     case types.GET_CHEAP_ERROR:
-      return { ...cheap, error: action.payload };
+      return { ...cheap, error: action.error };
     default:
       return cheap;
   }

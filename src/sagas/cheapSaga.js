@@ -1,5 +1,15 @@
-import * as types from '../actionTypes';
 import { put, call } from 'redux-saga/effects';
-import { getFlight } from '../api';
+import { getCheapFlight } from '../api';
+import {
+  getCheapSuccessAction,
+  getCheapErrorAction
+} from '../actions/cheapActions';
 
-export function* getCheapSaga({ payload }) {}
+export function* getCheapSaga(action) {
+  try {
+    const { data } = yield call(getCheapFlight);
+    yield put(getCheapSuccessAction(data));
+  } catch (error) {
+    yield put(getCheapErrorAction(error.message));
+  }
+}

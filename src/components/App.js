@@ -5,7 +5,12 @@ import FlightForm from './FlightForm';
 import NotMatch from './NotMatch';
 
 class App extends Component {
+  componentDidMount() {
+    // this.props.handleGetCheap();
+  }
+
   render() {
+    // console.log(this.props.cheap);
     return (
       <div>
         <nav>
