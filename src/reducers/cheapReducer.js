@@ -3,6 +3,8 @@ import * as types from '../actionTypes';
 
 export default function(cheap = initialState.cheap, action) {
   switch (action.type) {
+    case types.GET_CHEAP_LOADING:
+      return { ...cheap, loading: action.loading };
     case types.GET_CHEAP_SUCCESS:
       return { ...cheap, flight: action.payload };
     case types.GET_CHEAP_ERROR:

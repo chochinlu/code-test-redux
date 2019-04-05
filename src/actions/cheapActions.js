@@ -4,6 +4,11 @@ export const getCheapAction = () => ({
   type: types.GET_CHEAP
 });
 
+export const getCheapLoadingAction = loading => ({
+  type: types.GET_CHEAP_LOADING,
+  loading
+});
+
 export const getCheapSuccessAction = payload => ({
   type: types.GET_CHEAP_SUCCESS,
   payload

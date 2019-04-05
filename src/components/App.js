@@ -11,6 +11,9 @@ class App extends Component {
 
   render() {
     // console.log(this.props.cheap);
+
+    const flightComponent = <Flight cheap={this.props.cheap} />;
+
     return (
       <div>
         <nav>
@@ -24,8 +27,8 @@ class App extends Component {
           </ul>
         </nav>
         <Switch>
-          <Route path="/" exact component={Flight} />
-          <Route path="/flight" exact component={Flight} />
+          <Route path="/" exact component={() => flightComponent} />
+          <Route path="/flight" exact component={() => flightComponent} />
           <Route path="/flight_form" component={() => <FlightForm />} />
           <Route component={NotMatch} />
         </Switch>
