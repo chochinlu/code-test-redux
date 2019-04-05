@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Flight({ cheap }) {
-  console.log(JSON.stringify(cheap.flight));
+  // console.log(JSON.stringify(cheap.flight));
   return (
     <div>
       <h1>Flight</h1>
