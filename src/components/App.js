@@ -26,8 +26,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.handleGetCheap();
-    this.props.handleGetBusiness();
+    // this.props.handleGetCheap();
+    // this.props.handleGetBusiness();
   }
 
   handleChange = (event, value) => {
