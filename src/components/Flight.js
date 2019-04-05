@@ -18,6 +18,9 @@ const styles = theme => ({
   table: {
     minWidth: 700
   },
+  sortHeader: {
+    cursor: 'pointer'
+  },
   row: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default
@@ -70,36 +73,40 @@ const Flight = ({ classes, cheap, business }) => {
         })
       : source;
 
-  const handleChangeTagFilter = tag => {
-    setTagFilter(tag);
-
-    let source = tagFiltedSource(tag);
-    source = departureFilteredSource(source);
-    source = arrivalFilteredSource(source);
+  const filterAll = (name, value) => {
+    let source;
+    source = name === 'tag' ? tagFiltedSource(value) : tagFiltedSource();
+    source =
+      name === 'departure'
+        ? departureFilteredSource(source, value)
+        : departureFilteredSource(source);
+    source =
+      name === 'arrival'
+        ? arrivalFilteredSource(source, value)
+        : arrivalFilteredSource(source);
 
     setFilterdSource(source);
+  };
+
+  const handleChangeTagFilter = value => {
+    setTagFilter(value);
+    filterAll('tag', value);
   };
 
   const handleChangeDepartureFilter = event => {
     const value = event.target.value;
     setDepartureFilter(value);
-
-    let source = tagFiltedSource();
-    source = departureFilteredSource(source, value);
-    source = arrivalFilteredSource(source);
-
-    setFilterdSource(source);
+    filterAll('departure', value);
   };
 
   const handleChangeArrivalFilter = event => {
     const value = event.target.value;
     setArrivalFilter(value);
+    filterAll('arrival', value);
+  };
 
-    let source = tagFiltedSource();
-    source = departureFilteredSource(source);
-    source = arrivalFilteredSource(source, value);
-
-    setFilterdSource(source);
+  const sort = value => {
+    console.log(value);
   };
 
   return (
@@ -174,7 +181,12 @@ const Flight = ({ classes, cheap, business }) => {
           <TableHead>
             <TableRow>
               <TableCell>Class</TableCell>
-              <TableCell>Departure</TableCell>
+              <TableCell
+                className={classes.sortHeader}
+                onClick={() => sort('departure')}
+              >
+                Departure
+              </TableCell>
               <TableCell>Arrival</TableCell>
               <TableCell>Departure Time</TableCell>
               <TableCell>A rrival Time</TableCell>
