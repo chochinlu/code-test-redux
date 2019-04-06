@@ -44,7 +44,7 @@ const Flight = ({ classes, cheap, business }) => {
   const [tagFilter, setTagFilter] = useState('all');
   const [departureFilter, setDepartureFilter] = useState('');
   const [arrivalFilter, setArrivalFilter] = useState('');
-  const [filterdSource, setFilterdSource] = useState(initSource);
+  const [filterdSource, setFilteredSource] = useState(initSource);
 
   const [departureDesc, setDepartureDesc] = useState(false);
   const [arrivalDesc, setArrivalDesc] = useState(false);
@@ -55,7 +55,7 @@ const Flight = ({ classes, cheap, business }) => {
     setTagFilter('all');
     setDepartureFilter('');
     setArrivalFilter('');
-    setFilterdSource(initSource);
+    setFilteredSource(initSource);
   };
 
   const tagFiltedSource = (value = tagFilter) => {
@@ -101,7 +101,7 @@ const Flight = ({ classes, cheap, business }) => {
         ? arrivalFilteredSource(source, value)
         : arrivalFilteredSource(source);
 
-    setFilterdSource(source);
+    setFilteredSource(source);
   };
 
   const handleChangeTagFilter = value => {
@@ -121,42 +121,39 @@ const Flight = ({ classes, cheap, business }) => {
     filterAll('arrival', value);
   };
 
-  const sortDeparture = () => {
-    setDepartureDesc(!departureDesc);
-
-    let source = filterdSource;
-    source = departureDesc
-      ? source.sort((a, b) => a.departure.localeCompare(b.departure))
-      : source.sort((a, b) => b.departure.localeCompare(a.departure));
-
-    setFilterdSource(source);
+  const field = {
+    departure: {
+      name: 'departure',
+      value: departureDesc,
+      setter: setDepartureDesc
+    },
+    arrival: {
+      name: 'arrival',
+      value: arrivalDesc,
+      setter: setArrivalDesc
+    },
+    dTime: {
+      name: 'departureTime',
+      value: departureTimeDesc,
+      setter: setDepartureTimeDesc
+    },
+    aTime: {
+      name: 'arrivalTime',
+      value: arrivalTimeDesc,
+      setter: setArrivalTimeDesc
+    }
   };
 
-  const sortArrival = () => {
-    setArrivalDesc(!arrivalDesc);
-    let source = filterdSource;
-    source = arrivalDesc
-      ? source.sort((a, b) => a.arrival.localeCompare(b.arrival))
-      : source.sort((a, b) => b.arrival.localeCompare(a.arrival));
-    setFilterdSource(source);
-  };
+  const sort = field => {
+    const { name, value, setter } = field;
 
-  const sortDepartureTime = () => {
-    setDepartureTimeDesc(!departureTimeDesc);
+    setter(!field.value);
     let source = filterdSource;
-    source = departureTimeDesc
-      ? source.sort((a, b) => a.departureTime.localeCompare(b.departureTime))
-      : source.sort((a, b) => b.departureTime.localeCompare(a.departureTime));
-    setFilterdSource(source);
-  };
+    source = value
+      ? source.sort((a, b) => a[name].localeCompare(b[name]))
+      : source.sort((a, b) => b[name].localeCompare(a[name]));
 
-  const sortArrivalTime = () => {
-    setArrivalTimeDesc(!arrivalTimeDesc);
-    let source = filterdSource;
-    source = arrivalTimeDesc
-      ? source.sort((a, b) => a.arrivalTime.localeCompare(b.arrivalTime))
-      : source.sort((a, b) => b.arrivalTime.localeCompare(a.arrivalTime));
-    setFilterdSource(source);
+    setFilteredSource(source);
   };
 
   const upArrow = up =>
@@ -242,30 +239,30 @@ const Flight = ({ classes, cheap, business }) => {
               <TableCell>Class</TableCell>
               <TableCell
                 className={classes.sortHeader}
-                onClick={() => sortDeparture()}
+                onClick={() => sort(field.departure)}
               >
                 Departure
                 {upArrow(departureDesc)}
               </TableCell>
               <TableCell
                 className={classes.sortHeader}
-                onClick={() => sortArrival()}
+                onClick={() => sort(field.arrival)}
               >
                 Arrival
                 {upArrow(arrivalDesc)}
               </TableCell>
               <TableCell
                 className={classes.sortHeader}
-                onClick={() => sortDepartureTime()}
+                onClick={() => sort(field.dTime)}
               >
                 Departure Time
                 {upArrow(departureTimeDesc)}
               </TableCell>
               <TableCell
                 className={classes.sortHeader}
-                onClick={() => sortArrivalTime()}
+                onClick={() => sort(field.aTime)}
               >
-                A rrival Time
+                Arrival Time
                 {upArrow(arrivalTimeDesc)}
               </TableCell>
             </TableRow>
