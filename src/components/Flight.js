@@ -5,12 +5,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableFooter from '@material-ui/core/TableFooter';
+import TablePagination from '@material-ui/core/TablePagination';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import TablePaginationActionsWrapped from './TablePaginationActionsWrapped';
 
 const styles = theme => ({
   heading: {
@@ -50,6 +52,18 @@ const Flight = ({ classes, cheap, business }) => {
   const [arrivalDesc, setArrivalDesc] = useState(false);
   const [departureTimeDesc, setDepartureTimeDesc] = useState(false);
   const [arrivalTimeDesc, setArrivalTimeDesc] = useState(false);
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleSetPage = (event, page) => {
+    setPage(parseInt(page, 10));
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setPage(0);
+    setRowsPerPage(parseInt(event.target.value));
+  };
 
   const clear = () => {
     setTagFilter('all');
@@ -102,6 +116,7 @@ const Flight = ({ classes, cheap, business }) => {
         : arrivalFilteredSource(source);
 
     setFilteredSource(source);
+    setPage(0);
   };
 
   const handleChangeTagFilter = value => {
@@ -154,6 +169,7 @@ const Flight = ({ classes, cheap, business }) => {
       : source.sort((a, b) => b[name].localeCompare(a[name]));
 
     setFilteredSource(source);
+    setPage(0);
   };
 
   const upArrow = up =>
@@ -268,16 +284,34 @@ const Flight = ({ classes, cheap, business }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filterdSource.map(f => (
-              <TableRow key={f.id} className={classes.row} hover>
-                <TableCell>{f.tag}</TableCell>
-                <TableCell>{f.departure}</TableCell>
-                <TableCell> {f.arrival}</TableCell>
-                <TableCell>{f.departureTime}</TableCell>
-                <TableCell>{f.arrivalTime}</TableCell>
-              </TableRow>
-            ))}
+            {filterdSource
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map(f => (
+                <TableRow key={f.id} className={classes.row} hover>
+                  <TableCell>{f.tag}</TableCell>
+                  <TableCell>{f.departure}</TableCell>
+                  <TableCell> {f.arrival}</TableCell>
+                  <TableCell>{f.departureTime}</TableCell>
+                  <TableCell>{f.arrivalTime}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 15]}
+                count={filterdSource.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  native: true
+                }}
+                onChangePage={(event, page) => handleSetPage(event, page)}
+                onChangeRowsPerPage={event => handleChangeRowsPerPage(event)}
+                ActionsComponent={TablePaginationActionsWrapped}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
       )}
     </>
