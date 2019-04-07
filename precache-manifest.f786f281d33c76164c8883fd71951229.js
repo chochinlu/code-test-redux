@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/code-test-redux/static/js/runtime~main.24aa5ed8.js"
   },
   {
-    "revision": "7deb1a14d5024161b143",
-    "url": "/code-test-redux/static/js/main.08ff20f4.chunk.js"
+    "revision": "42a7aca92ed4e480896d",
+    "url": "/code-test-redux/static/js/main.96ca17d5.chunk.js"
   },
   {
     "revision": "cac10078d80bdfee5fa0",
     "url": "/code-test-redux/static/js/2.c0156ceb.chunk.js"
   },
   {
-    "revision": "8190f4a7e1d3187cb6d618ab39e88a09",
+    "revision": "3fec34b6ca6f4198a6a022e4e2db9de1",
     "url": "/code-test-redux/index.html"
   }
 ];
