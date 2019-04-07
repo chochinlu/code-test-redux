@@ -7,8 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
 import TablePaginationActionsWrapped from './TablePaginationActionsWrapped';
 
@@ -22,7 +21,8 @@ const styles = theme => ({
     minWidth: 700
   },
   sortHeader: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontSize: 12
   },
   icon: {
     fontSize: 12
@@ -56,6 +56,9 @@ const Flight = ({ classes, cheap, business }) => {
   };
 
   const field = {
+    tag: {
+      name: 'class'
+    },
     departure: {
       name: 'departure',
       value: departureDesc,
@@ -91,12 +94,50 @@ const Flight = ({ classes, cheap, business }) => {
     setPage(0);
   };
 
-  const upArrow = up =>
-    up ? (
-      <ArrowUpwardIcon className={classes.icon} />
-    ) : (
-      <ArrowDownwardIcon className={classes.icon} />
-    );
+  const enhancedTableHead = (
+    <TableHead>
+      <TableRow>
+        {Object.keys(field).map(r => (
+          <TableCell
+            key={field[r].name}
+            className={classes.sortHeader}
+            padding="default"
+          >
+            {field[r].name === field.tag.name ? (
+              field.tag.name
+            ) : (
+              <TableSortLabel
+                active
+                direction={field[r].value ? 'desc' : 'asc'}
+                onClick={() => sort(field[r])}
+              >
+                {field[r].name}
+              </TableSortLabel>
+            )}
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+
+  const tableFooter = (
+    <TableFooter>
+      <TableRow>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 15]}
+          count={filterdSource.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          SelectProps={{
+            native: true
+          }}
+          onChangePage={(event, page) => handleSetPage(event, page)}
+          onChangeRowsPerPage={event => handleChangeRowsPerPage(event)}
+          ActionsComponent={TablePaginationActionsWrapped}
+        />
+      </TableRow>
+    </TableFooter>
+  );
 
   return (
     <>
@@ -120,39 +161,7 @@ const Flight = ({ classes, cheap, business }) => {
 
       {filterdSource.length > 0 && (
         <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Class</TableCell>
-              <TableCell
-                className={classes.sortHeader}
-                onClick={() => sort(field.departure)}
-              >
-                Departure
-                {upArrow(departureDesc)}
-              </TableCell>
-              <TableCell
-                className={classes.sortHeader}
-                onClick={() => sort(field.arrival)}
-              >
-                Arrival
-                {upArrow(arrivalDesc)}
-              </TableCell>
-              <TableCell
-                className={classes.sortHeader}
-                onClick={() => sort(field.dTime)}
-              >
-                Departure Time
-                {upArrow(departureTimeDesc)}
-              </TableCell>
-              <TableCell
-                className={classes.sortHeader}
-                onClick={() => sort(field.aTime)}
-              >
-                Arrival Time
-                {upArrow(arrivalTimeDesc)}
-              </TableCell>
-            </TableRow>
-          </TableHead>
+          {enhancedTableHead}
           <TableBody>
             {filterdSource
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -166,22 +175,7 @@ const Flight = ({ classes, cheap, business }) => {
                 </TableRow>
               ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 15]}
-                count={filterdSource.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  native: true
-                }}
-                onChangePage={(event, page) => handleSetPage(event, page)}
-                onChangeRowsPerPage={event => handleChangeRowsPerPage(event)}
-                ActionsComponent={TablePaginationActionsWrapped}
-              />
-            </TableRow>
-          </TableFooter>
+          {tableFooter}
         </Table>
       )}
     </>
