@@ -1,12 +1,15 @@
 {
   "name": "code-test-redux",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "https://chochinlu.github.io/code-test-redux",
+  "author": "Cho-Ching Lu <chochinlu@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "date-fns": "^1.30.1",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^6.0.1",
@@ -17,6 +20,8 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+   "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
