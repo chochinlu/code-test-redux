@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import Flight from './Flight';
 import FlightForm from './FlightForm';
 import NotMatch from './NotMatch';
-
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -33,61 +32,58 @@ const styles = theme => ({
   }
 });
 
-class App extends Component {
-  state = {
-    value: 0
+const initValue = ['/', 'flight'].includes(window.location.pathname) ? 0 : 1;
+
+const App = props => {
+  const [value, setValue] = useState(initValue);
+
+  const handleChange = (event, value) => {
+    setValue(value);
   };
 
-  componentDidMount() {
-    // this.props.handleGetCheap();
-    // this.props.handleGetBusiness();
-  }
+  useEffect(() => {
+    props.handleGetCheap();
+    props.handleGetBusiness();
+  }, []);
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+  const { classes, cheap, business } = props;
+  const { handleAddCheapFlight, handleAddBusinessFlight } = props;
 
-  render() {
-    // console.log(this.props.cheap);
-    const { classes, cheap, business } = this.props;
-    const { handleAddCheapFlight, handleAddBusinessFlight } = this.props;
+  const flightComponent = <Flight cheap={cheap} business={business} />;
+  const formComponent = (
+    <FlightForm
+      handleAddCheapFlight={handleAddCheapFlight}
+      handleAddBusinessFlight={handleAddBusinessFlight}
+    />
+  );
 
-    const flightComponent = <Flight cheap={cheap} business={business} />;
-    const formComponent = (
-      <FlightForm
-        handleAddCheapFlight={handleAddCheapFlight}
-        handleAddBusinessFlight={handleAddBusinessFlight}
-      />
-    );
+  return (
+    <MuiThemeProvider theme={theme}>
+      <Grid container>
+        <AppBar position="sticky" color="default">
+          <Tabs
+            value={value}
+            onChange={(event, value) => handleChange(event, value)}
+            variant="fullWidth"
+          >
+            <Tab label="Flight List" component={Link} to="/" />
+            <Tab label="Add Flight" component={Link} to="/flight_form" />
+          </Tabs>
+        </AppBar>
 
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Grid container>
-          <AppBar position="sticky" color="default">
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              variant="fullWidth"
-            >
-              <Tab label="Flight List" component={Link} to="/" />
-              <Tab label="Add Flight" component={Link} to="/flight_form" />
-            </Tabs>
-          </AppBar>
-
-          <Grid item xs={12}>
-            <Paper className={classes.root}>
-              <Switch>
-                <Route path="/" exact component={() => flightComponent} />
-                <Route path="/flight" exact component={() => flightComponent} />
-                <Route path="/flight_form" component={() => formComponent} />
-                <Route component={NotMatch} />
-              </Switch>
-            </Paper>
-          </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.root}>
+            <Switch>
+              <Route path="/" exact component={() => flightComponent} />
+              <Route path="/flight" exact component={() => flightComponent} />
+              <Route path="/flight_form" component={() => formComponent} />
+              <Route component={NotMatch} />
+            </Switch>
+          </Paper>
         </Grid>
-      </MuiThemeProvider>
-    );
-  }
-}
+      </Grid>
+    </MuiThemeProvider>
+  );
+};
 
 export default withStyles(styles)(App);
