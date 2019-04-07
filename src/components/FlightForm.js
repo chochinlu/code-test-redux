@@ -3,6 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+
 import { formatedDate } from '../utils/reformat';
 import uuid from 'uuid/v4';
 
@@ -10,24 +12,24 @@ const styles = theme => ({
   heading: {
     paddingTop: theme.spacing.unit
   },
+  form: {
+    maxWidth: '80vw'
+  },
+
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 250
+    marginRight: theme.spacing.unit
   },
   dateTimeField: {
     marginTop: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 250
+    marginRight: theme.spacing.unit
   },
   buttonGroup: {
     marginTop: theme.spacing.unit * 2
   },
   button: {
-    margin: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
-    width: 250
+    padding: theme.spacing.unit
   }
 });
 
@@ -93,109 +95,124 @@ const FlightForm = props => {
   return (
     <>
       <Typography variant="h4" gutterBottom className={classes.heading}>
-        Add One
+        Add Flight
       </Typography>
 
-      <form
-        noValidate
-        autoComplete="off"
-        onSubmit={event => handleSubmit(event)}
-      >
-        <div>
-          <TextField
-            id="tag"
-            name="tag"
-            onChange={event => handleChange(event)}
-            select
-            className={classes.textField}
-            label="Flight Class"
-            margin="normal"
-            SelectProps={{
-              native: true,
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-          >
-            <option key="cheap" value="cheap" defaultValue>
-              Cheap
-            </option>
-            <option key="business" value="business">
-              Business
-            </option>
-          </TextField>
-        </div>
+      <Grid container justify="center">
+        <form
+          noValidate
+          autoComplete="off"
+          onSubmit={event => handleSubmit(event)}
+        >
+          <Grid container spacing={24} className={classes.form}>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                fullWidth
+                id="tag"
+                name="tag"
+                onChange={event => handleChange(event)}
+                select
+                className={classes.textField}
+                label="Flight Class"
+                margin="normal"
+                SelectProps={{
+                  native: true,
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+              >
+                <option key="cheap" value="cheap" defaultValue>
+                  Cheap
+                </option>
+                <option key="business" value="business">
+                  Business
+                </option>
+              </TextField>
+            </Grid>
 
-        <div>
-          <TextField
-            id="departure"
-            name="departure"
-            label="Departure"
-            margin="normal"
-            value={data.departure}
-            onChange={event => handleChange(event)}
-            className={classes.textField}
-          />
-          <TextField
-            id="departureTime"
-            name="departureTime"
-            label="Departure Time"
-            type="datetime-local"
-            // defaultValue="2017-05-24T10:30"
-            value={data.departureTime}
-            onChange={event => handleChange(event)}
-            className={classes.dateTimeField}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-        </div>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                id="departure"
+                name="departure"
+                label="Departure"
+                margin="normal"
+                value={data.departure}
+                onChange={event => handleChange(event)}
+                className={classes.textField}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                id="departureTime"
+                name="departureTime"
+                label="Departure Time"
+                type="datetime-local"
+                value={data.departureTime} // defaultValue="2017-05-24T10:30"
+                onChange={event => handleChange(event)}
+                className={classes.dateTimeField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </Grid>
 
-        <div>
-          <TextField
-            id="arrival"
-            name="arrival"
-            label="Arrival"
-            margin="normal"
-            value={data.arrival}
-            onChange={event => handleChange(event)}
-            className={classes.textField}
-          />
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                id="arrival"
+                name="arrival"
+                label="Arrival"
+                margin="normal"
+                value={data.arrival}
+                onChange={event => handleChange(event)}
+                className={classes.textField}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                id="arrivalTime"
+                name="arrivalTime"
+                label="arrival Time"
+                type="datetime-local"
+                // defaultValue="2017-05-24T10:30"
+                value={data.arrivalTime}
+                onChange={event => handleChange(event)}
+                className={classes.dateTimeField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </Grid>
 
-          <TextField
-            id="arrivalTime"
-            name="arrivalTime"
-            label="arrival Time"
-            type="datetime-local"
-            // defaultValue="2017-05-24T10:30"
-            value={data.arrivalTime}
-            onChange={event => handleChange(event)}
-            className={classes.dateTimeField}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-        </div>
-
-        <div className={classes.buttonGroup}>
-          <Button
-            type="button"
-            variant="outlined"
-            className={classes.button}
-            onClick={() => clear()}
-          >
-            Clear
-          </Button>
-          <Button
-            type="submit"
-            variant="outlined"
-            className={classes.button}
-            disabled={notFillAll()}
-          >
-            Submit
-          </Button>
-        </div>
-      </form>
+            <Grid item xs={12} sm={6}>
+              <Button
+                fullWidth
+                type="button"
+                variant="outlined"
+                className={classes.button}
+                onClick={() => clear()}
+              >
+                Clear
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Button
+                fullWidth
+                type="submit"
+                variant="outlined"
+                className={classes.button}
+                disabled={notFillAll()}
+              >
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Grid>
     </>
   );
 };
