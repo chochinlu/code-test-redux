@@ -5,7 +5,7 @@ import AppContainer from '../AppContainer';
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/code-test-redux">
       <AppContainer />
     </BrowserRouter>
   );

@@ -32,7 +32,11 @@ const styles = theme => ({
   }
 });
 
-const initValue = ['/', 'flight'].includes(window.location.pathname) ? 0 : 1;
+const initValue = ['/', '/code-test-redux', '/code-test-redux/flight'].includes(
+  window.location.pathname
+)
+  ? 0
+  : 1;
 
 const App = props => {
   const [value, setValue] = useState(initValue);
